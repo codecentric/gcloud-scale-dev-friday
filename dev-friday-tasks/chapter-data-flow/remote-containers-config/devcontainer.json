@@ -1,0 +1,21 @@
+//devcontainer.json - reference: https://github.com/microsoft/vscode-docs/blob/main/docs/remote/devcontainerjson-reference.md
+{
+    "name": "apache-beam sdk env",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "..",
+    },
+
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "python.pythonPath": "/usr/local/bin/python3",
+		"python.linting.enabled": true,
+		"python.linting.pylintEnabled": true,
+    },
+
+    "extensions": [
+        "ms-python.python"
+    ],
+    // todo it automatically "initializeCommand": ["bash", ".devcontainer/auth_with_keyfile.sh"],
+    "remoteUser": "vscode"
+}
