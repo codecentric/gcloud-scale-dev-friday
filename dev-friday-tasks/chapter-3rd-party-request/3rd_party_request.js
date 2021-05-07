@@ -5,13 +5,13 @@ const { Bigtable } = require("@google-cloud/bigtable");
 const bigtable = new Bigtable();
 
 const getRowGreeting = (row) => {
-  return row.data["cf1"]["greeting"][0].value;
+  return row.data["cf1"]["services"][0].value;
 };
 
 exports.readRows = async (req, res) => {
   // Gets a reference to a Cloud Bigtable instance and database
-  const instance = bigtable.instance("grossestabelle");
-  const table = instance.table("trafficdata");
+  const instance = bigtable.instance("scale-bigtable");
+  const table = instance.table("scale-traffic");
   const [tableExists] = await table.exists();
   if (!tableExists) {
     res.send(`Error: Table not availabe Bigtable: ${err}`);
