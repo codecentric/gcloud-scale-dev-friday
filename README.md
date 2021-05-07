@@ -306,8 +306,9 @@ Now things are getting interesting. Here we like to create a dataflow-job to fee
   - [more Info about running dataflow jobs](https://cloud.google.com/sdk/gcloud/reference/dataflow/jobs/run)
 
 > Command for CLI for Templates:
+
 >```
->gcloud dataflow jobs run <jobName> --gcs-location gs://dataflow-templates-europe-west1/latest/GCS_Text_to_Cloud_PubSub --region europe-west1 --max-workers 5 --num-workers 1 --worker-region europe-west1 --staging-location gs://<bucketname>/temp --parameters inputFilePattern=gs://<bucketname>/messages/*.txt,outputTopic=projects/<projectid>/topics/<topicname>´
+>gcloud dataflow jobs run simulate_requests --gcs-location gs://dataflow-templates-europe-west1/latest/GCS_Text_to_Cloud_PubSub --region europe-west1 --max-workers 15 --num-workers 1 --worker-region europe-west1 --staging-location gs://$PROJECT_ID-scale/temp --parameters inputFilePattern=gs://$PROJECT_ID-scale/messages/2million_messages/\*.txt,outputTopic=projects/$PROJECT_ID/topics/simulator_client_request
 >```
 
 ---
