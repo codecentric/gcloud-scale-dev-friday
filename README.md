@@ -331,12 +331,12 @@ Here you can find some more information with the [cbt-tool](https://cloud.google
 ## Deletion (IMPORTANT!!!)
 
 ```bash
+gcloud dataflow jobs cancel buffer-to-bigtable --region europe-west1 &&
+gcloud functions delete scale_endpoint --region europe-west1 &&
 gcloud pubsub topics delete simulator_client_request &&
 gcloud pubsub topics delete request_buffer &&
-gcloud functions delete scale_endpoint && #Todo region info missing
-gcloud dataflow jobs cancel buffer-to-bigtable &&
+gcloud compute instances delete scale-notebook && #may take very long
 gcloud bigtable instances delete scale-bigtable &&
-gcloud compute instances delete scale-notebook && #todo doesn't work somehow
 gsutil rm -r gs://${PROJECT_ID}-scale
 ```
 Some GCS buckets were autocreated! List them:
