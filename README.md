@@ -306,8 +306,9 @@ Now things are getting interesting. Here we like to create a dataflow-job to fee
   - [more Info about running dataflow jobs](https://cloud.google.com/sdk/gcloud/reference/dataflow/jobs/run)
 
 > Command for CLI for Templates:
+
 >```
->gcloud dataflow jobs run <jobName> --gcs-location gs://dataflow-templates-europe-west1/latest/GCS_Text_to_Cloud_PubSub --region europe-west1 --max-workers 5 --num-workers 1 --worker-region europe-west1 --staging-location gs://<bucketname>/temp --parameters inputFilePattern=gs://<bucketname>/messages/*.txt,outputTopic=projects/<projectid>/topics/<topicname>´
+>gcloud dataflow jobs run simulate_requests --gcs-location gs://dataflow-templates-europe-west1/latest/GCS_Text_to_Cloud_PubSub --region europe-west1 --max-workers 15 --num-workers 1 --worker-region europe-west1 --staging-location gs://$PROJECT_ID-scale/temp --parameters inputFilePattern=gs://$PROJECT_ID-scale/messages/2million_messages/\*.txt,outputTopic=projects/$PROJECT_ID/topics/simulator_client_request
 >```
 
 ---
@@ -330,12 +331,12 @@ Here you can find some more information with the [cbt-tool](https://cloud.google
 ## Deletion (IMPORTANT!!!)
 
 ```bash
+gcloud dataflow jobs cancel buffer-to-bigtable --region europe-west1 &&
+gcloud functions delete scale_endpoint --region europe-west1 &&
 gcloud pubsub topics delete simulator_client_request &&
 gcloud pubsub topics delete request_buffer &&
-gcloud functions delete scale_endpoint && #Todo region info missing
-gcloud dataflow jobs cancel buffer-to-bigtable &&
+gcloud compute instances delete scale-notebook && #may take very long
 gcloud bigtable instances delete scale-bigtable &&
-gcloud compute instances delete scale-notebook && #todo doesn't work somehow
 gsutil rm -r gs://${PROJECT_ID}-scale
 ```
 Some GCS buckets were autocreated! List them:
