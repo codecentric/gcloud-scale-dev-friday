@@ -337,7 +337,7 @@ gcloud pubsub topics delete simulator_client_request &&
 gcloud pubsub topics delete request_buffer &&
 gcloud compute instances delete scale-notebook && #may take very long
 gcloud bigtable instances delete scale-bigtable &&
-gsutil rm -r gs://${PROJECT_ID}-scale
+gsutil rm -r gs://$PROJECT_ID-scale
 ```
 Some GCS buckets were autocreated! List them:
 
